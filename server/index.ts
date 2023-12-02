@@ -1,10 +1,13 @@
 import {publicProcedure, router} from './trpc';
 import {createHTTPServer} from "@trpc/server/adapters/standalone";
 import {z} from "zod";
+import prisma from "@/prisma/db";
+
 
 export const appRouter = router({
     allCart: publicProcedure.query(async () => {
-        return [1, 2, 3]
+        const p = await prisma.product.findMany()
+        return p
     })
 });
 
