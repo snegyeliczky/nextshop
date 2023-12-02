@@ -1,5 +1,4 @@
 import {publicProcedure, router} from './trpc';
-import {createHTTPServer} from "@trpc/server/adapters/standalone";
 import {z} from "zod";
 import prisma from "@/prisma/db";
 
@@ -16,11 +15,12 @@ const productCart = z.object({
 // add zod validation
 export const appRouter = router({
     allCart: publicProcedure.query(async () => {
-        const p = await prisma.product.findMany()
-        return p
+        return await prisma.product.findMany()
+
     }),
     addProduct: publicProcedure.input(productCart).mutation(async (opts) => {
         const {input} = opts
+        console.log(input.name)
     })
 });
 
