@@ -20,7 +20,7 @@ export const appRouter = router({
     }),
     addProduct: publicProcedure.input(productCart).mutation(async (opts) => {
         const {input} = opts
-        console.log(input.name)
+
     })
 });
 
