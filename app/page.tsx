@@ -1,7 +1,5 @@
-import Image from 'next/image'
 import {Product} from "@/app/types";
 import ProductCard from "@/app/components/ProductCard";
-import prisma from "@/prisma/db";
 
 
 export default async function Home() {
