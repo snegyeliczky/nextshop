@@ -40,7 +40,7 @@ const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
         <>
             {inCartObj.map(el => (
                 <div key={el?.product?.id}>
-                    <img src={el?.product?.img}/>
+                    <img src={el?.product?.img} alt={el?.product?.name}/>
                     <h1>Amount: {el.count}</h1>
                     {el?.product && <RemoveFromCart cartIds={el.cartIds} productId={el?.product?.id} remove={remove}/>}
                 </div>))}
