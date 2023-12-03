@@ -27,10 +27,10 @@ export const appRouter = router({
         })
 
     }),
-    removeProduct: publicProcedure.input(z.object({productId: z.string()})).mutation(async (opts) => {
+    removeProduct: publicProcedure.input(z.object({productId: z.number()})).mutation(async (opts) => {
         const {input} = opts
-        await prisma.product.deleteMany({
-            where: {productId: input.productId}
+        await prisma.product.delete({
+            where: {id: input.productId}
         })
     })
 });

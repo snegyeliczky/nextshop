@@ -3,7 +3,7 @@ import React, {FC} from 'react';
 import {trpc} from "@/app/_trpc/client";
 
 type props = {
-    productId: string
+    productId: number
 }
 const RemoveFromCart: FC<props> = ({productId}) => {
     const removeFromCart = trpc.removeProduct.useMutation()

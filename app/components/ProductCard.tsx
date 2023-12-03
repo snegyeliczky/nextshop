@@ -5,9 +5,10 @@ import RemoveFromCart from "@/app/components/RemoveFromCart";
 
 type props = {
     product?: Product
+    cartId?: number
 }
 
-const ProductCard: FC<props> = ({product}) => {
+const ProductCard: FC<props> = ({product, cartId}) => {
 
     return product ? (
         <div
@@ -19,7 +20,7 @@ const ProductCard: FC<props> = ({product}) => {
                 <div>Min Order: {product.minOrderAmount} </div>
             </div>
             <AddProduct product={product}/>
-            <RemoveFromCart productId={product.id}/>
+            {cartId && <RemoveFromCart productId={cartId}/>}
         </div>
     ) : <div> Empty </div>;
 };
