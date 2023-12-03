@@ -18,21 +18,22 @@ export const appRouter = router({
         return await prisma.product.findMany()
 
     }),
-    addProduct: publicProcedure.input(productCart).mutation(async (opts) => {
+    addProduct: publicProcedure.input(productCart).output(z.object({stock: z.number()})).mutation(async (opts) => {
         const {input} = opts
-        await prisma.stock.update({
+        const currentStock = await prisma.stock.update({
             where: {productId: input.productId}, data: {
                 quantity: {
                     decrement: 1
                 }
             }
         })
-        return await prisma.product.create({
+        await prisma.product.create({
             data: {
                 ...input
             }
         })
-
+        console.log(currentStock)
+        return {stock: currentStock.quantity}
     }),
     removeProduct: publicProcedure.input(z.object({
         cartId: z.number(),

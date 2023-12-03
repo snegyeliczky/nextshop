@@ -5,13 +5,13 @@ import RemoveFromCart from "@/app/components/RemoveFromCart";
 import {serverClient} from "@/app/_trpc/serverClient";
 
 type props = {
-    product?: Product
+    product: Product
     cartId?: number
 }
 
 const ProductCard: FC<props> = async ({product, cartId}) => {
 
-    const stock = product && await serverClient.getStockForProduct({prodId: product?.id})
+    const initStock = await serverClient.getStockForProduct({prodId: product.id})
 
 
     return product ? (
@@ -20,10 +20,9 @@ const ProductCard: FC<props> = async ({product, cartId}) => {
             <div>{product.name}</div>
             <img src={product.img}/>
             <div>
-                <div>Available: {stock?.quantity}</div>
                 <div>Min Order: {product.minOrderAmount} </div>
             </div>
-            <AddProduct product={product} availableAmount={stock?.quantity}/>
+            <AddProduct product={product} initStockAmount={initStock}/>
             {cartId && <RemoveFromCart cartId={cartId} productId={product.id}/>}
         </div>
     ) : <div> Empty </div>;

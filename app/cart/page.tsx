@@ -20,7 +20,9 @@ const Page = async () => {
         <main className="flex min-h-screen flex-row flex-wrap  items-center justify-around p-24">
             <h1>Chart</h1>
             <Link href={'/'}>To shop</Link>
-            {cartProds.map(prod => <ProductCard key={prod.cartId} product={prod.product} cartId={prod.cartId}/>)}
+            {cartProds &&
+                cartProds.map(prod =>
+                    prod.product && <ProductCard key={prod.cartId} product={prod.product} cartId={prod.cartId}/>)}
         </main>
     );
 };
