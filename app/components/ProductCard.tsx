@@ -1,8 +1,10 @@
 import React, {FC} from 'react';
-import {product} from "@/app/types";
+import {Product} from "@/app/types";
+import AddProduct from "@/app/components/AddProduct";
+import RemoveFromCart from "@/app/components/RemoveFromCart";
 
 type props = {
-    product?: product
+    product?: Product
 }
 
 const ProductCard: FC<props> = ({product}) => {
@@ -16,7 +18,8 @@ const ProductCard: FC<props> = ({product}) => {
                 <div>Available: {product.availableAmount}</div>
                 <div>Min Order: {product.minOrderAmount} </div>
             </div>
-            <button>Add</button>
+            <AddProduct product={product}/>
+            <RemoveFromCart productId={product.id}/>
         </div>
     ) : <div> Empty </div>;
 };

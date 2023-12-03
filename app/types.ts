@@ -1,4 +1,4 @@
-export type product = {
+export type Product = {
     name: string
     img: string
     minOrderAmount: string
