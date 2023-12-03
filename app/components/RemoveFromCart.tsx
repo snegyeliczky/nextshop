@@ -2,15 +2,23 @@
 import React, {FC} from 'react';
 import {trpc} from "@/app/_trpc/client";
 
+
 type props = {
-    cartId: number
+    cartIds: number[]
     productId: string
+    remove: (cartId: number, productId: string) => void
 }
-const RemoveFromCart: FC<props> = ({cartId, productId}) => {
-    const removeFromCart = trpc.removeProduct.useMutation()
+const RemoveFromCart: FC<props> = ({cartIds, productId, remove}) => {
+
+    // const removeFromCart = trpc.removeProduct.useMutation()
+
 
     return (
-        <button onClick={async () => await removeFromCart.mutate({cartId, productId})}>
+        <button onClick={async () => {
+            await remove(cartIds[0], productId)
+            // await removeFromCart.mutate({cartId: cartIds[0], productId})
+
+        }}>
             Remove from cart
         </button>
     );

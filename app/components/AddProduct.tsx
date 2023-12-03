@@ -11,7 +11,8 @@ type props = {
 }
 const AddProduct: FC<props> = ({product, initStockAmount}) => {
     const getStack = trpc.getStockForProduct.useQuery({prodId: product.id}, {
-        initialData: initStockAmount, refetchOnMount: false,
+        initialData: initStockAmount,
+        refetchOnMount: false,
         refetchOnReconnect: false,
     })
     const addToCart = trpc.addProduct.useMutation({
