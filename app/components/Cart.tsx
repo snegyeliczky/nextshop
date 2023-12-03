@@ -15,7 +15,7 @@ type props = {
 const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
     const getCart = trpc.allCart.useQuery(undefined, {initialData: cartItem})
     const removeFromCart = trpc.removeProduct.useMutation({onSettled: () => getCart.refetch()})
-    const cartCollection = getCart.data.reduce((acc, current) => {
+    const mergeOrderWithProduct = getCart.data.reduce((acc, current) => {
         const currentCartId = current.id
         const id = current.productId
 
@@ -30,7 +30,7 @@ const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
         }
         return acc
     }, {} as Record<string, { count: number, product?: Product, cartIds: number[] }>)
-    const inCartObj = Object.values(cartCollection)
+    const inCartObj = Object.values(mergeOrderWithProduct)
 
     const remove = async (cartId: number, productId: string) => {
         await removeFromCart.mutate({cartId, productId})

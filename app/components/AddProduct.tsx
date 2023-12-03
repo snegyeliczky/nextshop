@@ -12,19 +12,18 @@ type props = {
 const AddProduct: FC<props> = ({product, initStockAmount}) => {
     const getStack = trpc.getStockForProduct.useQuery({prodId: product.id}, {
         initialData: initStockAmount,
-        refetchOnMount: false,
-        refetchOnReconnect: false,
     })
     const addToCart = trpc.addProduct.useMutation({
         onSettled: () => getStack.refetch()
     })
 
+    const amount = getStack.data?.quantity
 
     return (
         <>
-            <div>Available: {getStack.data?.quantity}</div>
+            <div>Available: {amount}</div>
             <button
-                disabled={!initStockAmount || initStockAmount.quantity <= 0}
+                disabled={!amount || amount <= 0}
                 onClick={async () => await addToCart.mutate({
                     productId: product.id,
                     name: product.name,
