@@ -17,7 +17,7 @@ const ProductCard: FC<props> = async ({product, cartId}) => {
         <div
             className={'flex flex-col items-center justify-between p-5 border-dotted border-2 border-sky-300 max-h-96 w-44 m-5'}>
             <div>{product.name}</div>
-            <img src={product.img}/>
+            <img src={product.img} alt={product.name}/>
             <div>Price: {product.price}</div>
             <div>Min Order: {product.minOrderAmount} </div>
             <AddProduct product={product} initStockAmount={initStock}/>
