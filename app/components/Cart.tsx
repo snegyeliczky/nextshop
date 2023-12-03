@@ -1,14 +1,10 @@
 "use client"
 
 import {Product} from "@/app/types";
-import React, {FC, useEffect} from "react";
-import ProductCard from "@/app/components/ProductCard";
+import {FC} from "react";
 import {serverClient} from "@/app/_trpc/serverClient";
-import {GetServerSideProps} from "next";
 import {trpc} from "@/app/_trpc/client";
 import RemoveFromCart from "@/app/components/RemoveFromCart";
-
-export type CartProduct = { product?: Product, cartId: number }
 
 type props = {
     cartItem: Awaited<ReturnType<(typeof serverClient)["allCart"]>>
