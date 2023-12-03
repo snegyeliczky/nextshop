@@ -41,7 +41,9 @@ const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
             {inCartObj.map(el => (
                 <div key={el?.product?.id}>
                     <img src={el?.product?.img} alt={el?.product?.name}/>
+                    <h1> {Number(el?.product?.minOrderAmount) > el.count ? `Please add more to reach minimal order: ${el?.product?.minOrderAmount} ` : ""}</h1>
                     <h1>Amount: {el.count}</h1>
+                    <h2>price: {(el?.product?.price ?? 0) * el.count}</h2>
                     {el?.product && <RemoveFromCart cartIds={el.cartIds} productId={el?.product?.id} remove={remove}/>}
                 </div>))}
         </>

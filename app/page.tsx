@@ -13,8 +13,9 @@ export default async function Home() {
 
     return (
         <main className="flex min-h-screen flex-row flex-wrap  items-center justify-around p-24">
+  
             {prods.map((prod) => <ProductCard key={prod.id} product={prod}/>)}
-            <Link href={'/cart'}>To cart</Link>
+            <div><Link href={'/cart'}>To cart</Link></div>
             {isInit && <InitStock prods={prods}/>}
         </main>
     )
