@@ -2,7 +2,7 @@
 
 import {trpc} from "@/app/_trpc/client";
 import {Product} from "@/app/types";
-import React, {FC, useState} from "react";
+import React, {FC} from "react";
 import {serverClient} from "@/app/_trpc/serverClient";
 
 type props = {
