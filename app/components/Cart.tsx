@@ -5,6 +5,7 @@ import {FC} from "react";
 import {serverClient} from "@/app/_trpc/serverClient";
 import {trpc} from "@/app/_trpc/client";
 import RemoveFromCart from "@/app/components/RemoveFromCart";
+import Image from 'next/image'
 
 type props = {
     cartItem: Awaited<ReturnType<(typeof serverClient)["allCart"]>>
@@ -40,7 +41,7 @@ const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
         <>
             {inCartObj.map(el => (
                 <div key={el?.product?.id}>
-                    <img src={el?.product?.img} alt={el?.product?.name}/>
+                    <Image src={el?.product?.img ?? ""} alt={el?.product?.name ?? ""} width={500} height={500}/>
                     <h1> {Number(el?.product?.minOrderAmount) > el.count ? `Please add more to reach minimal order: ${el?.product?.minOrderAmount} ` : ""}</h1>
                     <h1>Amount: {el.count}</h1>
                     <h2>price: {(el?.product?.price ?? 0) * el.count}</h2>
