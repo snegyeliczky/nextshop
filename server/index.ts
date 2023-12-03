@@ -1,6 +1,7 @@
 import {publicProcedure, router} from './trpc';
 import {z} from "zod";
-import prisma from "@/prisma/db";
+import {prisma} from "@/prisma/db";
+
 
 const Status = z.enum(["IN_CART", "PAYED", "REMUVED"])
 
