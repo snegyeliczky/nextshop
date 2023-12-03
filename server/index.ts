@@ -32,6 +32,18 @@ export const appRouter = router({
         await prisma.product.delete({
             where: {id: input.productId}
         })
+    }),
+
+    initStock: publicProcedure.input(z.array(z.object({
+        productId: z.string(),
+        quantity: z.number()
+    }))).mutation(async (opts) => {
+        const {input} = opts
+        const res = await prisma.stock.createMany({
+            data: input
+        })
+        return res
+
     })
 });
 

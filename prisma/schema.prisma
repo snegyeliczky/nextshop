@@ -20,6 +20,11 @@ model Product {
   status    Status
 }
 
+model Stock {
+  productId String @id
+  quantity  Int
+}
+
 enum Status {
   IN_CART
   PAYED
