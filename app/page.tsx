@@ -2,7 +2,6 @@ import {Product} from "@/app/types";
 import ProductCard from "@/app/components/ProductCard";
 import Link from "next/link";
 import React from "react";
-import {serverClient} from "@/app/_trpc/serverClient";
 import InitStock from "@/app/components/InitStock";
 
 
