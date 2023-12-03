@@ -2,6 +2,7 @@ import React from 'react';
 import {Product} from "@/app/types";
 import ProductCard from "@/app/components/ProductCard";
 import {serverClient} from "@/app/_trpc/serverClient";
+import Link from "next/link";
 // import {trpc} from "@/app/_trpc/client";
 
 const Page = async () => {
@@ -18,6 +19,7 @@ const Page = async () => {
     return (
         <main className="flex min-h-screen flex-row flex-wrap  items-center justify-around p-24">
             <h1>Chart</h1>
+            <Link href={'/'}>To shop</Link>
             {cartProds.map(prod => <ProductCard key={prod.cartId} product={prod.product} cartId={prod.cartId}/>)}
         </main>
     );

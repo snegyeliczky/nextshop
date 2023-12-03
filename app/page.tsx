@@ -1,5 +1,7 @@
 import {Product} from "@/app/types";
 import ProductCard from "@/app/components/ProductCard";
+import Link from "next/link";
+import React from "react";
 
 
 export default async function Home() {
@@ -9,7 +11,7 @@ export default async function Home() {
     return (
         <main className="flex min-h-screen flex-row flex-wrap  items-center justify-around p-24">
             {prods.map((prod) => <ProductCard key={prod.id} product={prod}/>)}
-
+            <Link href={'/cart'}>To cart</Link>
         </main>
     )
 }
