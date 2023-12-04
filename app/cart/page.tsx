@@ -1,7 +1,6 @@
 import React from 'react';
 import {Product} from "@/app/types";
 import {serverClient} from "@/app/_trpc/serverClient";
-import Link from "next/link";
 import Cart from "@/app/components/Cart";
 import Card from "@/app/components/uiComponents/Card";
 import Navigation from "@/app/components/Navigation";

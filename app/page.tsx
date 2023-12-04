@@ -1,6 +1,5 @@
 import {Product} from "@/app/types";
 import ProductCard from "@/app/components/ProductCard";
-import Link from "next/link";
 import React from "react";
 import InitStock from "@/app/components/InitStock";
 import Card from "@/app/components/uiComponents/Card";
