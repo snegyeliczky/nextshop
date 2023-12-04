@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {FC} from "react";
 import {UserButton} from "@clerk/nextjs";
-import {auth, currentUser} from "@clerk/nextjs"
+import {currentUser} from "@clerk/nextjs"
 
 type Props = {
     url: string
