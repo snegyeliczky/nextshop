@@ -15,12 +15,23 @@ const ProductCard: FC<props> = async ({product, cartId}) => {
 
 
     return product ? (
-        <div
-            className={'flex flex-col items-center justify-between p-5 border-dotted border-2 border-sky-300 max-h-96 w-44 m-5'}>
-            <div>{product.name}</div>
-            <Image src={product.img} alt={product.name} width={500} height={500}/>
-            <div>Price: {product.price}</div>
-            <div>Min Order: {product.minOrderAmount} </div>
+        <div className="">
+            <div
+                className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                <Image src={product.img} alt={product.name} width={500} height={500}
+                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"/>
+            </div>
+            <div className="mt-2 flex justify-between">
+                <div>
+                    <h3 className="text-s text-gray-700">
+                        {product.name}
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-500">Min Order: {product.minOrderAmount}</p>
+                </div>
+
+                <p className="text-sm font-medium text-gray-900">Price: {product.price}</p>
+            </div>
+
             <AddProduct product={product} initStockAmount={initStock}/>
         </div>
     ) : <div> Empty </div>;

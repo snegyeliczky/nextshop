@@ -21,9 +21,9 @@ const AddProduct: FC<props> = ({product, initStockAmount}) => {
 
     return (
         <>
-            <div>Available: {amount}</div>
+            <p className="mt-1 text-lg font-medium text-gray-900">Available: {amount}</p>
             <button
-                className={"bg-violet-500 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 p-1 rounded "}
+                className={"bg-violet-100 hover:bg-violet-300 active:bg-violet-600 focus:outline-2 p-1.5 rounded mt-2 text-sm text-gray-700"}
                 disabled={!amount || amount <= 0}
                 onClick={async () => await addToCart.mutate({
                     productId: product.id,
