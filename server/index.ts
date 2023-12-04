@@ -58,10 +58,10 @@ export const appRouter = router({
         quantity: z.number()
     }))).mutation(async (opts) => {
         const {input} = opts
-        const res = await prisma.stock.createMany({
+        return await prisma.stock.createMany({
             data: input
         })
-        return res
+        
 
     }),
     getStockForProduct: publicProcedure.input(z.object({prodId: z.string()})).query(async (opts) => {
