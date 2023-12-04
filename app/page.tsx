@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import InitStock from "@/app/components/InitStock";
 import Card from "@/app/components/uiComponents/Card";
+import Navigation from "@/app/components/Navigation";
 
 
 export default async function Home() {
@@ -14,10 +15,8 @@ export default async function Home() {
 
     return (
         <>
-            <header className="flex items-end justify-end sticky p-8 ">
-                <div><Link href={'/cart'}>To cart</Link></div>
-                {isInit && <InitStock prods={prods}/>}
-            </header>
+            <Navigation url={'/cart'} text={"To Cart"}/>
+            {isInit && <InitStock prods={prods}/>}
             <Card title={"Best Products"}>
                 {prods.map((prod) => <ProductCard key={prod.id} product={prod}/>)}
             </Card>

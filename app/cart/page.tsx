@@ -4,6 +4,7 @@ import {serverClient} from "@/app/_trpc/serverClient";
 import Link from "next/link";
 import Cart from "@/app/components/Cart";
 import Card from "@/app/components/uiComponents/Card";
+import Navigation from "@/app/components/Navigation";
 
 
 const Page = async () => {
@@ -14,9 +15,7 @@ const Page = async () => {
 
     return (
         <>
-            <header className="flex items-end justify-end sticky p-8 ">
-                <Link href={'/'}>To shop</Link>
-            </header>
+            <Navigation url={'/'} text={"To Shop"}/>
             <Card title={"Your Cart"}>
                 <Cart cartItem={cartRes} persistedProductsMock={prods}/>
             </Card>
