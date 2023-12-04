@@ -4,8 +4,7 @@ import {Product} from "@/app/types";
 import {FC} from "react";
 import {serverClient} from "@/app/_trpc/serverClient";
 import {trpc} from "@/app/_trpc/client";
-import RemoveFromCart from "@/app/components/RemoveFromCart";
-import Image from 'next/image'
+import CartProduct from "@/app/components/CartProduct";
 
 type props = {
     cartItem: Awaited<ReturnType<(typeof serverClient)["allCart"]>>
@@ -31,7 +30,7 @@ const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
         }
         return acc
     }, {} as Record<string, { count: number, product?: Product, cartIds: number[] }>)
-    const inCartObj = Object.values(mergeOrderWithProduct)
+    const inCartMembers = Object.values(mergeOrderWithProduct)
 
     const remove = async (cartId: number, productId: string) => {
         await removeFromCart.mutate({cartId, productId})
@@ -39,14 +38,15 @@ const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
 
     return (
         <>
-            {inCartObj.map(el => (
-                <div key={el?.product?.id}>
-                    <Image src={el?.product?.img ?? ""} alt={el?.product?.name ?? ""} width={500} height={500}/>
-                    <h1> {Number(el?.product?.minOrderAmount) > el.count ? `Please add more to reach minimal order: ${el?.product?.minOrderAmount} ` : ""}</h1>
-                    <h1>Amount: {el.count}</h1>
-                    <h2>price: {(el?.product?.price ?? 0) * el.count}</h2>
-                    {el?.product && <RemoveFromCart cartIds={el.cartIds} productId={el?.product?.id} remove={remove}/>}
-                </div>))}
+            {inCartMembers.map(cartMember => (
+                cartMember.product &&
+                <CartProduct
+                    key={cartMember.product.id}
+                    product={cartMember.product}
+                    count={cartMember.count}
+                    cartIds={cartMember.cartIds}
+                    remove={remove}
+                />))}
         </>
     );
 };
