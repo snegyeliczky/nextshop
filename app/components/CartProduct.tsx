@@ -13,7 +13,7 @@ type Props = {
 }
 
 const CartProduct: FC<Props> = ({cartIds, product, count, remove}) => {
-    const isEnough = Number(product.minOrderAmount) <= count
+    const isEnough = product.minOrderAmount <= count
     const textColor = isEnough ? "mt-1 text-sm text-black-500" : "mt-1 text-sm text-gray-500"
     return (
         <div key={product.id}>
