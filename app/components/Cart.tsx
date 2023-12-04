@@ -5,6 +5,7 @@ import {FC} from "react";
 import {serverClient} from "@/app/_trpc/serverClient";
 import {trpc} from "@/app/_trpc/client";
 import CartProduct from "@/app/components/CartProduct";
+import {ProductToOrder} from "@/app/_utilities/mergeOrdersAndProducts/merge";
 
 type props = {
     cartItem: Awaited<ReturnType<(typeof serverClient)["allCart"]>>
@@ -15,30 +16,15 @@ type props = {
 const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
     const getCart = trpc.allCart.useQuery(undefined, {initialData: cartItem})
     const removeFromCart = trpc.removeProduct.useMutation({onSettled: () => getCart.refetch()})
-    const mergeOrderWithProduct = getCart.data.reduce((acc, current) => {
-        const currentCartId = current.id
-        const id = current.productId
-
-        acc[id] ? acc[id] = {
-            ...acc[id],
-            count: acc[id].count + 1,
-            cartIds: [...acc[id].cartIds, currentCartId]
-        } : acc[id] = {
-            count: 1,
-            product: persistedProductsMock.find(p => p.id === id),
-            cartIds: [currentCartId]
-        }
-        return acc
-    }, {} as Record<string, { count: number, product?: Product, cartIds: number[] }>)
+    const mergeOrderWithProduct = ProductToOrder(getCart.data, persistedProductsMock)
     const inCartMembers = Object.values(mergeOrderWithProduct)
 
     const remove = async (cartId: number, productId: string) => {
         await removeFromCart.mutate({cartId, productId})
     }
-
     return (
         <>
-            {inCartMembers.map(cartMember => (
+            {inCartMembers.length ? inCartMembers.map(cartMember => (
                 cartMember.product &&
                 <CartProduct
                     key={cartMember.product.id}
@@ -46,7 +32,7 @@ const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
                     count={cartMember.count}
                     cartIds={cartMember.cartIds}
                     remove={remove}
-                />))}
+                />)) : <p className={"mt-1 text-s text-gray-500"}>Your cart is empty... :(</p>}
         </>
     );
 };
