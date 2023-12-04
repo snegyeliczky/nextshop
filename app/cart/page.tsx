@@ -3,6 +3,7 @@ import {Product} from "@/app/types";
 import {serverClient} from "@/app/_trpc/serverClient";
 import Link from "next/link";
 import Cart from "@/app/components/Cart";
+import Card from "@/app/components/uiComponents/Card";
 
 
 const Page = async () => {
@@ -12,11 +13,14 @@ const Page = async () => {
 
 
     return (
-        <main className="flex min-h-screen flex-row flex-wrap  items-center justify-around p-24">
-            <h1>Chart</h1>
-            <Link href={'/'}>To shop</Link>
-            <Cart cartItem={cartRes} persistedProductsMock={prods}/>
-        </main>
+        <>
+            <header className="flex items-end justify-end sticky p-8 ">
+                <Link href={'/'}>To shop</Link>
+            </header>
+            <Card title={"Your Cart"}>
+                <Cart cartItem={cartRes} persistedProductsMock={prods}/>
+            </Card>
+        </>
     );
 };
 
