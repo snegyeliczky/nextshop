@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-import Image from "next/image";
 import RemoveFromCart from "@/app/components/RemoveFromCart";
 import {Product} from "@/app/types";
 import Img from "@/app/components/uiComponents/Img";
