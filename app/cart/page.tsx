@@ -13,12 +13,12 @@ const Page = async () => {
 
 
     return (
-        <>
+        <section className={"relative"}>
             <Navigation url={'/'} text={"To Shop"}/>
             <Card title={"Your Cart"}>
                 <Cart cartItem={cartRes} persistedProductsMock={prods}/>
             </Card>
-        </>
+        </section>
     );
 };
 

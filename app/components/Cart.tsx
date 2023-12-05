@@ -6,6 +6,9 @@ import {serverClient} from "@/app/_trpc/serverClient";
 import {trpc} from "@/app/_trpc/client";
 import CartProduct from "@/app/components/CartProduct";
 import {ProductToOrder} from "@/app/_utilities/mergeOrdersAndProducts/merge";
+import Spinner from "@/app/components/uiComponents/Spinner";
+
+// TODO refactor cart to support individual cart item modification
 
 type props = {
     cartItem: Awaited<ReturnType<(typeof serverClient)["allCart"]>>
@@ -36,7 +39,7 @@ const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
                     cartIds={cartMember.cartIds}
                     remove={remove}
                 />)) : <p className={"mt-1 text-s text-gray-500"}>Your cart is empty... :(</p>}
-
+            {isLoading && <Spinner/>}
         </>
     );
 };
