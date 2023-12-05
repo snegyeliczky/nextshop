@@ -33,20 +33,25 @@ export const appRouter = router({
     addProduct: publicProcedure.input(productCart).output(z.object({stock: z.number()})).mutation(async (opts) => {
         const {input} = opts
         const {userId} = auth()
-        const currentStock = await prisma.stock.update({
-            where: {productId: input.productId}, data: {
-                quantity: {
-                    decrement: 1
+        const availableStock = await prisma.stock.findUnique({where: {productId: input.productId}})
+        const isInStock = Boolean(availableStock?.quantity)
+        if (isInStock && userId) {
+            const currentStock = await prisma.stock.update({
+                where: {productId: input.productId}, data: {
+                    quantity: {
+                        decrement: 1
+                    }
                 }
-            }
-        })
-        userId && await prisma.product.create({
-            data: {
-                ...input,
-                userId: userId
-            }
-        })
-        return {stock: currentStock.quantity}
+            })
+            await prisma.product.create({
+                data: {
+                    ...input,
+                    userId: userId
+                }
+            })
+            return {stock: currentStock.quantity}
+        }
+        return {stock: 0}
     }),
     removeProduct: publicProcedure.input(z.object({
         cartId: z.number(),
