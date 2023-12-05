@@ -19,6 +19,8 @@ const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
     const mergeOrderWithProduct = ProductToOrder(getCart.data, persistedProductsMock)
     const inCartMembers = Object.values(mergeOrderWithProduct)
 
+    const isLoading = getCart.isLoading || removeFromCart.isLoading
+
     const remove = async (cartId: number, productId: string) => {
         await removeFromCart.mutate({cartId, productId})
     }
@@ -28,11 +30,13 @@ const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
                 cartMember.product &&
                 <CartProduct
                     key={cartMember.product.id}
+                    isLoading={isLoading}
                     product={cartMember.product}
                     count={cartMember.count}
                     cartIds={cartMember.cartIds}
                     remove={remove}
                 />)) : <p className={"mt-1 text-s text-gray-500"}>Your cart is empty... :(</p>}
+
         </>
     );
 };

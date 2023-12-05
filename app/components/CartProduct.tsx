@@ -10,9 +10,10 @@ type Props = {
     count: number
     cartIds: number[]
     remove: (cartId: number, productId: string) => Promise<void>
+    isLoading: boolean
 }
 
-const CartProduct: FC<Props> = ({cartIds, product, count, remove}) => {
+const CartProduct: FC<Props> = ({cartIds, product, count, remove, isLoading}) => {
     const isEnough = product.minOrderAmount <= count
     const textColor = isEnough ? "mt-1 text-sm text-black-500" : "mt-1 text-sm text-gray-500"
     return (
@@ -23,7 +24,7 @@ const CartProduct: FC<Props> = ({cartIds, product, count, remove}) => {
             }
             <p className={textColor}>Total Amount: {count}</p>
             <Price textColor={textColor} text={"Total price:"} price={(product?.price ?? 0) * count}/>
-            <RemoveFromCart cartIds={cartIds} productId={product.id} remove={remove}/>
+            <RemoveFromCart cartIds={cartIds} productId={product.id} remove={remove} isDisabled={isLoading}/>
         </div>
     );
 };
