@@ -17,7 +17,7 @@ type props = {
 
 
 const Cart: FC<props> = ({cartItem, persistedProductsMock}) => {
-    const getCart = trpc.allCart.useQuery(undefined, {initialData: cartItem})
+    const getCart = trpc.getUserCart.useQuery(undefined, {initialData: cartItem})
     const removeFromCart = trpc.removeProduct.useMutation({onSettled: () => getCart.refetch()})
     const mergeOrderWithProduct = ProductToOrder(getCart.data, persistedProductsMock)
     const inCartMembers = Object.values(mergeOrderWithProduct)
