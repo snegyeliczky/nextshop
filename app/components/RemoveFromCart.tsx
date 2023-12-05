@@ -6,12 +6,13 @@ type props = {
     cartIds: number[]
     productId: string
     remove: (cartId: number, productId: string) => void
+    isDisabled: boolean
 }
-const RemoveFromCart: FC<props> = ({cartIds, productId, remove}) => {
+const RemoveFromCart: FC<props> = ({cartIds, productId, remove, isDisabled}) => {
 
 
     return (
-        <Button onclick={() => remove(cartIds[0], productId)} text={"Remove from cart"}/>
+        <Button onclick={() => remove(cartIds[0], productId)} text={"Remove from cart"} isDisabled={isDisabled}/>
     );
 };
 

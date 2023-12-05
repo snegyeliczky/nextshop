@@ -15,16 +15,16 @@ const ProductCard: FC<props> = async ({product}) => {
 
 
     return product ? (
-        <div className="">
+        <div className="relative">
             <Img src={product.img} alt={product.name}/>
             <div className="mt-2 flex justify-between">
                 <div>
-                    <h3 className="text-s text-gray-700">
+                    <h3 className="text-m font-medium text-gray-700">
                         {product.name}
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">Min Order: {product.minOrderAmount}</p>
                 </div>
-                <Price textColor={"text-sm font-medium text-gray-900"} text={"Price:"} price={product.price}/>
+                <Price textColor={"text-m font-medium text-gray-900"} text={"Price:"} price={product.price}/>
             </div>
 
             <AddProduct product={product} initStockAmount={initStock}/>
