@@ -7,6 +7,7 @@ import {serverClient} from "@/app/_trpc/serverClient";
 import Button from "@/app/components/uiComponents/Button";
 import Spinner from "@/app/components/uiComponents/Spinner";
 
+
 type props = {
     product: Product
     initStockAmount: Awaited<ReturnType<(typeof serverClient)["getStockForProduct"]>>
@@ -23,12 +24,11 @@ const AddProduct: FC<props> = ({product, initStockAmount}) => {
 
     const amount = getStock.data?.quantity
 
-    const addProduct = async () => await addToCart.mutate({
+    const addProduct = async () => addToCart.mutate({
         productId: product.id,
         name: product.name,
         price: product.price,
         status: "IN_CART",
-        userId: "1"
     })
 
     const isAdding = getStock.isLoading || addToCart.isLoading

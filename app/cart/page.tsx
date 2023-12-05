@@ -9,7 +9,7 @@ import Navigation from "@/app/components/Navigation";
 const Page = async () => {
     const prodsRes = await fetch('https://63c10327716562671870f959.mockapi.io/products', {cache: "default"})
     const prods: Product[] = await prodsRes.json()
-    const cartRes = await serverClient.allCart()
+    const cartRes = await serverClient.getUserCart()
 
 
     return (
