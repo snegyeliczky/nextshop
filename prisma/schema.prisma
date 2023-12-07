@@ -12,10 +12,20 @@ datasource db {
 }
 
 model Product {
-  id        Int    @id @default(autoincrement())
+  id             String @id
+  name           String
+  img            String @db.LongText
+  minOrderAmount Int
+  price          Int
+  orders         Cart[]
+}
+
+model Cart {
+  id        Int     @id @default(autoincrement())
   name      String
   userId    String
   productId String
+  product   Product @relation(fields: [productId], references: [id])
   price     Int
   status    Status
 }

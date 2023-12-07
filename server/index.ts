@@ -20,11 +20,11 @@ const productCart = z.object({
 // add zod validation
 export const appRouter = router({
     allCart: publicProcedure.query(async () =>
-        await prisma.product.findMany()
+        await prisma.cart.findMany()
     ),
     getUserCart: publicProcedure.query(async () => {
         const {userId} = auth()
-        return userId ? await prisma.product.findMany({
+        return userId ? await prisma.cart.findMany({
             where: {
                 userId: userId
             }
@@ -43,7 +43,7 @@ export const appRouter = router({
                     }
                 }
             })
-            await prisma.product.create({
+            await prisma.cart.create({
                 data: {
                     ...input,
                     userId: userId
@@ -65,7 +65,7 @@ export const appRouter = router({
                 }
             }
         })
-        await prisma.product.delete({
+        await prisma.cart.delete({
             where: {id: input.cartId}
         })
     }),
@@ -75,12 +75,21 @@ export const appRouter = router({
         quantity: z.number()
     }))).mutation(async (opts) => {
         const {input} = opts
-        return await prisma.stock.createMany({
+        return prisma.stock.createMany({
             data: input
         })
-
-
     }),
+    initProducts: publicProcedure.input(z.array(z.object({
+        id: z.string(),
+        name: z.string(),
+        img: z.string(),
+        minOrderAmount: z.number(),
+        price: z.number(),
+    }))).mutation(async (opts) => {
+        const {input} = opts
+        return prisma.product.createMany({data: input})
+    }),
+
     getStockForProduct: publicProcedure.input(z.object({prodId: z.string()})).query(async (opts) => {
         const {input} = opts
         return await prisma.stock.findUnique({
