@@ -4,20 +4,21 @@ import React from "react";
 import InitStock from "@/app/components/InitStock";
 import Card from "@/app/components/uiComponents/Card";
 import Navigation from "@/app/components/Navigation";
+import {serverClient} from "@/app/_trpc/serverClient";
 
 
 export default async function Home() {
-    const prodsRes = await fetch('https://63c10327716562671870f959.mockapi.io/products', {cache: "default"})
-    const prods: Product[] = await prodsRes.json()
+    
+    const products = await serverClient.getProducts()
     const isInit = false
 
 
     return (
         <>
             <Navigation url={'/cart'} text={"To Cart"}/>
-            {isInit && <InitStock prods={prods}/>}
+            {isInit && <InitStock prods={products}/>}
             <Card title={"Best Products"}>
-                {prods.map((prod) => <ProductCard key={prod.id} product={prod}/>)}
+                {products.map((prod) => <ProductCard key={prod.id} product={prod}/>)}
             </Card>
         </>
     )

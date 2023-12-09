@@ -5,7 +5,6 @@ import {auth} from "@clerk/nextjs";
 
 //TODO Add router tests
 //TODO study to separate routs
-//TODO after persist products create relation between stock and product and return once to cart
 
 
 const Status = z.enum(["IN_CART", "PAYED", "REMUVED"])
@@ -17,11 +16,11 @@ const productCart = z.object({
     status: Status,
     productId: z.string()
 })
-// add zod validation
 export const appRouter = router({
     allCart: publicProcedure.query(async () =>
         await prisma.cart.findMany()
     ),
+    getProducts: publicProcedure.query(async () => await prisma.product.findMany({include: {stock: true}})),
     getUserCart: publicProcedure.query(async () => {
         const {userId} = auth()
         return userId ? await prisma.cart.findMany({

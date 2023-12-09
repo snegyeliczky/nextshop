@@ -1,21 +1,20 @@
 'use client'
 
 import {trpc} from "@/app/_trpc/client";
-import {Product} from "@/app/types";
+import {ProductModel} from "@/app/types";
 import React, {FC} from "react";
-import {serverClient} from "@/app/_trpc/serverClient";
+
 import Button from "@/app/components/uiComponents/Button";
 import Spinner from "@/app/components/uiComponents/Spinner";
 
 
 type props = {
-    product: Product
-    initStockAmount: Awaited<ReturnType<(typeof serverClient)["getStockForProduct"]>>
+    product: ProductModel
 }
-const AddProduct: FC<props> = ({product, initStockAmount}) => {
+const AddProduct: FC<props> = ({product}) => {
 
     const getStock = trpc.getStockForProduct.useQuery({prodId: product.id}, {
-        initialData: initStockAmount,
+        initialData: product.stock,
     })
 
     const addToCart = trpc.addProduct.useMutation({
