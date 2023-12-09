@@ -11,9 +11,6 @@ type props = {
 
 const ProductCard: FC<props> = async ({product}) => {
 
-    const initStock = await serverClient.getStockForProduct({prodId: product.id})
-
-
     return product ? (
         <div className="relative">
             <Img src={product.img} alt={product.name}/>

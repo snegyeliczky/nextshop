@@ -1,4 +1,3 @@
-import {Product} from "@/app/types";
 import ProductCard from "@/app/components/ProductCard";
 import React from "react";
 import InitStock from "@/app/components/InitStock";
@@ -8,7 +7,7 @@ import {serverClient} from "@/app/_trpc/serverClient";
 
 
 export default async function Home() {
-    
+
     const products = await serverClient.getProducts()
     const isInit = false
 
