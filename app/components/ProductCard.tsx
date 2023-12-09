@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {ProductModel} from "@/app/types";
 import AddProduct from "@/app/components/AddProduct";
-import {serverClient} from "@/app/_trpc/serverClient";
 import Img from "@/app/components/uiComponents/Img";
 import Price from "@/app/components/uiComponents/Price";
 
