@@ -1,18 +1,14 @@
 import React, {FC} from 'react';
-import {Product} from "@/app/types";
+import {ProductModel} from "@/app/types";
 import AddProduct from "@/app/components/AddProduct";
-import {serverClient} from "@/app/_trpc/serverClient";
 import Img from "@/app/components/uiComponents/Img";
 import Price from "@/app/components/uiComponents/Price";
 
 type props = {
-    product: Product
+    product: ProductModel
 }
 
 const ProductCard: FC<props> = async ({product}) => {
-
-    const initStock = await serverClient.getStockForProduct({prodId: product.id})
-
 
     return product ? (
         <div className="relative">
@@ -27,7 +23,7 @@ const ProductCard: FC<props> = async ({product}) => {
                 <Price textColor={"text-m font-medium text-gray-900"} text={"Price:"} price={product.price}/>
             </div>
 
-            <AddProduct product={product} initStockAmount={initStock}/>
+            <AddProduct product={product}/>
         </div>
     ) : <div> Empty </div>;
 };
