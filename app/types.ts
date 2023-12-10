@@ -1,19 +1,5 @@
-export type Product = {
-    name: string
-    img: string
-    minOrderAmount: number
-    availableAmount: number,
-    price: number,
-    id: string
-}
+import {Product, Stock} from '@prisma/client'
 
-export type ProductModel = {
-    name: string
-    img: string
-    minOrderAmount: number
-    price: number,
-    id: string
+export type ProductAndStock = Product & {
     stock: Stock | null
 }
-
-export type Stock = { productId: string, quantity: number }

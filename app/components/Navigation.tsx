@@ -11,7 +11,7 @@ const Navigation: FC<Props> = async ({url, text}) => {
     const user = await currentUser()
 
     return (
-        <header className="flex items-end justify-between sticky p-9 ">
+        <header className="flex items-end justify-between fixed w-full p-5 z-10">
             <div className={"flex items-center "}>
                 <UserButton afterSignOutUrl={'/'}/>
                 <p className={"pl-3 text-sm font-extralight"}>Welcome {user?.firstName}</p>

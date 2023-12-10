@@ -1,9 +1,8 @@
 import {serverClient} from "@/app/_trpc/serverClient";
-import {Product} from "@/app/types";
+import {Product} from "@prisma/client";
 
 export const ProductToOrder = (
-    cartItem: Awaited<ReturnType<(typeof serverClient)["allCart"]>>,
-    persistedProductsMock: Product[]
+    cartItem: Awaited<ReturnType<(typeof serverClient)["getUserCart"]>>,
 ) => cartItem.reduce((acc, current) => {
     const currentCartId = current.id
     const id = current.productId
@@ -14,7 +13,7 @@ export const ProductToOrder = (
         cartIds: [...acc[id].cartIds, currentCartId]
     } : acc[id] = {
         count: 1,
-        product: persistedProductsMock.find(p => p.id === id),
+        product: current.product,
         cartIds: [currentCartId]
     }
     return acc

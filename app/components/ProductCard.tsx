@@ -1,11 +1,12 @@
 import React, {FC} from 'react';
-import {ProductModel} from "@/app/types";
+import {ProductAndStock} from "@/app/types";
 import AddProduct from "@/app/components/AddProduct";
 import Img from "@/app/components/uiComponents/Img";
 import Price from "@/app/components/uiComponents/Price";
 
+
 type props = {
-    product: ProductModel
+    product: ProductAndStock
 }
 
 const ProductCard: FC<props> = async ({product}) => {

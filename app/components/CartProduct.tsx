@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import RemoveFromCart from "@/app/components/RemoveFromCart";
-import {Product} from "@/app/types";
+import {Product} from "@prisma/client";
 import Img from "@/app/components/uiComponents/Img";
 import Price from "@/app/components/uiComponents/Price";
 
@@ -9,7 +9,7 @@ type Props = {
     product: Product
     count: number
     cartIds: number[]
-    remove: (cartId: number, productId: string) => Promise<void>
+    remove: (cartId: number, productId: string) => void
     isLoading: boolean
 }
 

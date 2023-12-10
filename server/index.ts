@@ -26,6 +26,9 @@ export const appRouter = router({
         return userId ? await prisma.cart.findMany({
             where: {
                 userId: userId
+            },
+            include: {
+                product: true
             }
         }) : []
     }),

@@ -1,7 +1,7 @@
 'use client'
 
 import {trpc} from "@/app/_trpc/client";
-import {ProductModel} from "@/app/types";
+import {ProductAndStock} from "@/app/types";
 import React, {FC} from "react";
 
 import Button from "@/app/components/uiComponents/Button";
@@ -9,7 +9,7 @@ import Spinner from "@/app/components/uiComponents/Spinner";
 
 
 type props = {
-    product: ProductModel
+    product: ProductAndStock
 }
 const AddProduct: FC<props> = ({product}) => {
 
