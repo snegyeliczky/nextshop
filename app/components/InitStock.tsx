@@ -1,10 +1,10 @@
 'use client'
 import React, {FC} from 'react';
-import {ProductModel} from "@/app/types";
+import {ProductAndStock} from "@/app/types";
 import {trpc} from "@/app/_trpc/client";
 
 type props = {
-    prods: ProductModel[]
+    prods: ProductAndStock[]
 }
 const InitStock: FC<props> = ({prods}) => {
     const stock = prods.map(p => ({
