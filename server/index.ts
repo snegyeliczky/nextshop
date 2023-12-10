@@ -22,8 +22,8 @@ export const appRouter = router({
     ),
     fetchProducts: publicProcedure.query(async () => {
         const p = await fetch('https://63c10327716562671870f959.mockapi.io/products')
-        const pj = await p.json()
-        return pj
+        return await p.json()
+
     }),
     getProducts: publicProcedure.query(async () => await prisma.product.findMany({include: {stock: true}})),
     getUserCart: publicProcedure.query(async () => {
