@@ -9,11 +9,11 @@ datasource db {
 }
 
 model Product {
-  id             String @id
+  id             String  @id
   name           String
-  img            String @db.LongText
+  img            String  @db.LongText
   minOrderAmount Int
-  price          Int
+  price          Decimal
   orders         Cart[]
   stock          Stock?
 }
@@ -23,9 +23,9 @@ model Cart {
   name      String
   userId    String
   productId String
-  product   Product @relation(fields: [productId], references: [id])
-  price     Int
+  price     Decimal
   status    Status
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 model Stock {
