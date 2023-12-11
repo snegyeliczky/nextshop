@@ -54,6 +54,7 @@ export const appRouter = router({
             await prisma.cart.create({
                 data: {
                     ...input,
+                    price: new Prisma.Decimal(input.price),
                     userId: userId
                 }
             })

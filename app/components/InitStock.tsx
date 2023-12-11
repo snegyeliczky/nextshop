@@ -1,7 +1,6 @@
 'use client'
 import React, {FC} from 'react';
 import {trpc} from "@/app/_trpc/client";
-import {Prisma} from ".prisma/client";
 
 type FetchedProduct = {
     availableAmount: number
