@@ -27,8 +27,6 @@ const InitStock: FC = () => {
         price: p.price,
     }))
 
-    console.log(initProducts)
-
     const init = trpc.initStock.useMutation()
     const initProds = trpc.initProducts.useMutation()
 
