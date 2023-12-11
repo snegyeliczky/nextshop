@@ -2,6 +2,7 @@ import {publicProcedure, router} from './trpc';
 import {z} from "zod";
 import {prisma} from "@/prisma/db";
 import {auth} from "@clerk/nextjs";
+import {Prisma} from ".prisma/client";
 
 //TODO Add router tests
 //TODO study to separate routs
@@ -94,7 +95,10 @@ export const appRouter = router({
         price: z.number(),
     }))).mutation(async (opts) => {
         const {input} = opts
-        return prisma.product.createMany({data: input})
+        input.forEach(async (product) => {
+            await prisma.product.create({data: {...product, price: new Prisma.Decimal(product.price)}})
+        })
+        return
     }),
 
     getStockForProduct: publicProcedure.input(z.object({prodId: z.string()})).query(async (opts) => {
