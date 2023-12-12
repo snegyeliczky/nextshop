@@ -1,6 +1,4 @@
 import {FC} from "react";
-import {Prisma} from ".prisma/client";
-import Decimal = Prisma.Decimal;
 
 type Props = {
     textColor: string
