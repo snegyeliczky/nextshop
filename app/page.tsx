@@ -8,7 +8,7 @@ import {serverClient} from "@/app/_trpc/serverClient";
 
 export default async function Home() {
     const products = await serverClient.getProducts()
-    const isInit = true
+    const isInit = false
 
 
     return (
