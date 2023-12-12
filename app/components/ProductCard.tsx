@@ -21,7 +21,7 @@ const ProductCard: FC<props> = async ({product}) => {
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">Min Order: {product.minOrderAmount}</p>
                 </div>
-                <Price textColor={"text-m font-medium text-gray-900"} text={"Price:"} price={product.price}/>
+                <Price textColor={"text-m font-medium text-gray-900"} text={"Price:"} price={Number(product.price)}/>
             </div>
 
             <AddProduct product={product}/>
