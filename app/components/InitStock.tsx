@@ -1,17 +1,25 @@
 'use client'
 import React, {FC} from 'react';
-import {ProductAndStock} from "@/app/types";
 import {trpc} from "@/app/_trpc/client";
 
-type props = {
-    prods: ProductAndStock[]
+type FetchedProduct = {
+    availableAmount: number
+    id: string
+    img: string
+    minOrderAmount: number
+    name: string
+    price: number
 }
-const InitStock: FC<props> = ({prods}) => {
-    const stock = prods.map(p => ({
+
+const InitStock: FC = () => {
+    const {data, isLoading} = trpc.fetchProducts.useQuery()
+
+
+    const stock = data?.map((p: FetchedProduct) => ({
         productId: p.id,
-        quantity: p.stock?.quantity ?? 0
+        quantity: p.availableAmount
     }))
-    const initProducts = prods.map(p => ({
+    const initProducts = data?.map((p: FetchedProduct) => ({
         id: p.id,
         name: p.name,
         img: p.img.toString(),
@@ -22,11 +30,11 @@ const InitStock: FC<props> = ({prods}) => {
     const init = trpc.initStock.useMutation()
     const initProds = trpc.initProducts.useMutation()
 
-    return (
+
+    return isLoading ? <p>Data is loading...</p> : (
         <button onClick={() => {
             init.mutate(stock)
             initProds.mutate(initProducts)
-
         }}>
             Init Stock
         </button>

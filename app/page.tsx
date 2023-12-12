@@ -7,7 +7,6 @@ import {serverClient} from "@/app/_trpc/serverClient";
 
 
 export default async function Home() {
-
     const products = await serverClient.getProducts()
     const isInit = false
 
@@ -15,10 +14,10 @@ export default async function Home() {
     return (
         <>
             <Navigation url={'/cart'} text={"To Cart"}/>
-            {isInit && <InitStock prods={products}/>}
             <Card title={"Best Products"}>
                 {products.map((prod) => <ProductCard key={prod.id} product={prod}/>)}
             </Card>
+            {isInit && <InitStock/>}
         </>
     )
 }

@@ -26,7 +26,7 @@ const AddProduct: FC<props> = ({product}) => {
     const addProduct = async () => addToCart.mutate({
         productId: product.id,
         name: product.name,
-        price: product.price,
+        price: Number(product.price),
         status: "IN_CART",
     })
 

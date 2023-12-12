@@ -23,7 +23,7 @@ const CartProduct: FC<Props> = ({cartIds, product, count, remove, isLoading}) =>
                 <p className="mt-1 text-sm text-red-400"> {`Please reach minimal order: ${product?.minOrderAmount} `}</p>
             }
             <p className={textColor}>Total Amount: {count}</p>
-            <Price textColor={textColor} text={"Total price:"} price={(product?.price ?? 0) * count}/>
+            <Price textColor={textColor} text={"Total price:"} price={(Number(product?.price) ?? 0) * count}/>
             <RemoveFromCart cartIds={cartIds} productId={product.id} remove={remove} isDisabled={isLoading}/>
         </div>
     );
