@@ -5,7 +5,7 @@ import Decimal = Prisma.Decimal;
 type Props = {
     textColor: string
     text: string
-    price: Decimal
+    price: number
     currency?: string
 }
 
