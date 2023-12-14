@@ -2,7 +2,7 @@ import {serverClient} from "@/app/_trpc/serverClient";
 import {Product} from "@prisma/client";
 
 export const ProductToOrder = (
-    cartItem: Awaited<ReturnType<(typeof serverClient)["getUserCart"]>>,
+    cartItem: Awaited<ReturnType<(typeof serverClient.cart)["getUserCart"]>>,
 ) => cartItem.reduce((acc, current) => {
     const currentCartId = current.id
     const id = current.productId

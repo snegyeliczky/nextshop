@@ -13,11 +13,11 @@ type props = {
 }
 const AddProduct: FC<props> = ({product}) => {
 
-    const getStock = trpc.getStockForProduct.useQuery({prodId: product.id}, {
+    const getStock = trpc.product.getStockForProduct.useQuery({prodId: product.id}, {
         initialData: product.stock,
     })
 
-    const addToCart = trpc.addProduct.useMutation({
+    const addToCart = trpc.product.addProduct.useMutation({
         onSettled: () => getStock.refetch()
     })
 

@@ -10,13 +10,13 @@ import Spinner from "@/app/components/uiComponents/Spinner";
 // TODO refactor cart to support individual cart item modification
 
 type props = {
-    cartItem: Awaited<ReturnType<(typeof serverClient)["getUserCart"]>>
+    cartItem: Awaited<ReturnType<(typeof serverClient.cart)["getUserCart"]>>
 }
 
 
 const Cart: FC<props> = ({cartItem}) => {
-    const getCart = trpc.getUserCart.useQuery(undefined, {initialData: cartItem})
-    const removeFromCart = trpc.removeProduct.useMutation({onSettled: () => getCart.refetch()})
+    const getCart = trpc.cart.getUserCart.useQuery(undefined, {initialData: cartItem})
+    const removeFromCart = trpc.product.removeProduct.useMutation({onSettled: () => getCart.refetch()})
     const mergeOrderWithProduct = ProductToOrder(getCart.data)
     const inCartMembers = Object.values(mergeOrderWithProduct)
 
