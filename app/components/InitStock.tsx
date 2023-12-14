@@ -12,7 +12,7 @@ type FetchedProduct = {
 }
 
 const InitStock: FC = () => {
-    const {data, isLoading} = trpc.fetchProducts.useQuery()
+    const {data, isLoading} = trpc.product.fetchProducts.useQuery()
 
 
     const stock = data?.map((p: FetchedProduct) => ({
@@ -27,8 +27,8 @@ const InitStock: FC = () => {
         price: p.price,
     }))
 
-    const init = trpc.initStock.useMutation()
-    const initProds = trpc.initProducts.useMutation()
+    const init = trpc.stock.initStock.useMutation()
+    const initProds = trpc.product.initProducts.useMutation()
 
 
     return isLoading ? <p>Data is loading...</p> : (

@@ -6,7 +6,7 @@ import Navigation from "@/app/components/Navigation";
 
 const Page = async () => {
 
-    const cartRes = await serverClient.getUserCart()
+    const cartRes = await serverClient.cart.getUserCart()
 
     return (
         <section className={"relative"}>
